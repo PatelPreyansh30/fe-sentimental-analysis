@@ -38,7 +38,7 @@ const Analyze = () => {
       const res = await appClient.post(ApiConstant.GET_REVIEW_RESULT, {
         sentence: sentence,
       });
-      setReviewStatus(res.data.result);
+      setReviewStatus(res.data.result.type);
       setIsApiCalling(false);
     } catch {
       setIsApiCalling(false);
