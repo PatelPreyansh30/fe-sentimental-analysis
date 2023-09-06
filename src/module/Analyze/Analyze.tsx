@@ -16,6 +16,7 @@ const Analyze = () => {
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsButtonClicked(false);
+    setIsApiCalling(false);
     const { value } = e.currentTarget;
     setSentence(value);
   };
@@ -37,6 +38,7 @@ const Analyze = () => {
         sentence: sentence,
       });
       setReviewStatus(res.data.result);
+      setIsApiCalling(false);
     } catch {
       setIsApiCalling(false);
       setIsButtonClicked(false);
