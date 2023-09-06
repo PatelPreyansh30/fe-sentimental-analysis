@@ -17,6 +17,7 @@ const Analyze = () => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsButtonClicked(false);
     setIsApiCalling(false);
+    setReviewStatus(undefined);
     const { value } = e.currentTarget;
     setSentence(value);
   };
@@ -72,9 +73,9 @@ const Analyze = () => {
             <p className="text-2xl font-semibold">
               <u>Review Analysis</u>
             </p>
-            <div className="grid grid-cols-[auto_auto] gap-[10px] items-center mt-2">
+            <div className="flex items-center w-max p-3 mt-2 rounded-md bg-slate-100 hover:bg-slate-200">
               <p>{sentence}</p>
-              <p className="text-white">
+              <p className="ml-2 text-white">
                 {reviewStatus === "Positive" && (
                   <span className="p-2 rounded-md bg-green-500">
                     {reviewStatus}
