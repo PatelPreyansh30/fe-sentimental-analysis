@@ -4,19 +4,19 @@ import axios from "axios";
 import { ApiConstant } from "@/constant/applicationConstant";
 import { ToastErrorMessage, ToastWarningMessage } from "@/utils/toastifyAlerts";
 
-const authClient = axios.create({
+const appClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
   timeout: 5000,
 });
 
-authClient.interceptors.request.use(
+appClient.interceptors.request.use(
   (config) => {
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-authClient.interceptors.response.use(
+appClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
@@ -62,4 +62,4 @@ authClient.interceptors.response.use(
   }
 );
 
-export default authClient;
+export default appClient;
