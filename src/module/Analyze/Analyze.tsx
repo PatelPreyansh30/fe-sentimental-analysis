@@ -87,9 +87,9 @@ const Analyze = () => {
         />
         <button
           onClick={handleOnClick}
-          className={`mt-3 px-6 py-2 rounded-full text-white bg-blue-400 ${
-            isButtonClicked ? "cursor-not-allowed" : "hover:bg-blue-500"
-          } border`}
+          className={`mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
+            isButtonClicked ? "cursor-not-allowed" : "hover:bg-green-600"
+          }`}
           disabled={isButtonClicked}
         >
           Analyze

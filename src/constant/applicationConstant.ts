@@ -1,5 +1,6 @@
 export const ApplicationConstant = {
-  // main routes
+  HOME_PATH: "/",
+  BULK_ANALYSIS_PATH: "bulk/",
 };
 
 export const ApiConstant = {

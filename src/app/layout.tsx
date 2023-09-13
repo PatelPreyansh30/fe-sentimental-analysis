@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,16 +21,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [showHideSidebar, setShowHideSidebar] = useState(true);
+  const [toggleSidebar, setToggleSidebar] = useState(true);
+
   return (
     <html lang="en">
       <body className={`bg-slate-50 ${inter.className}`}>
         <ToastifyAlerts />
-        <div>
-          <Navbar
-            showHideSidebar={() => setShowHideSidebar(!showHideSidebar)}
-          />
-          <div className="mt-[75px]">{children}</div>
+        <Navbar showHideSidebar={() => setToggleSidebar(!toggleSidebar)} />
+        <div
+          className={`mt-[75px] ${toggleSidebar ? "ml-[250px]" : "ml-[0px]"}`}
+        >
+          {toggleSidebar && <Sidebar />}
+          {children}
         </div>
       </body>
     </html>
