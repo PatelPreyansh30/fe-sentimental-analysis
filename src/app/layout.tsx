@@ -1,7 +1,11 @@
+"use client";
+
 import ToastifyAlerts from "@/utils/ToastifyContainer";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +20,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [showHideSidebar, setShowHideSidebar] = useState(true);
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`bg-slate-50 ${inter.className}`}>
         <ToastifyAlerts />
-        {children}
+        <div>
+          <Navbar
+            showHideSidebar={() => setShowHideSidebar(!showHideSidebar)}
+          />
+          <div className="mt-[75px]">{children}</div>
+        </div>
       </body>
     </html>
   );
