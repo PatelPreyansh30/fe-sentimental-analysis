@@ -9,26 +9,24 @@ import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 const Analyze = () => {
-  const [localStorageReviews, setLocalStorageReviews] = useState<
+  const [sessionStorageReviews, setSessionStorageReviews] = useState<
     { sentence: string; type: string }[]
   >([]);
   const [sentence, setSentence] = useState<string>("");
-  const [reviewStatus, setReviewStatus] = useState<string | undefined>();
   const [isApiCalling, setIsApiCalling] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
-    let reviews = localStorage.getItem("review");
+    let reviews = sessionStorage.getItem("review");
     let reviewsList: { sentence: string; type: string }[] = reviews
       ? JSON.parse(reviews)
       : [];
-    setLocalStorageReviews(reviewsList);
+    setSessionStorageReviews(reviewsList);
   }, []);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsButtonClicked(false);
     setIsApiCalling(false);
-    setReviewStatus(undefined);
     const { value } = e.currentTarget;
     setSentence(value);
   };
@@ -49,9 +47,9 @@ const Analyze = () => {
       const res = await appClient.post(ApiConstant.GET_REVIEW_RESULT, {
         sentence: sentence,
       });
-      setReviewStatus(res.data.result.type);
 
-      let existingReview = localStorage.getItem("review");
+      // Setting new review in session storage
+      let existingReview = sessionStorage.getItem("review");
       let reviewObjectList: { sentence: string; type: string }[] =
         existingReview ? JSON.parse(existingReview) : [];
       reviewObjectList.push({
@@ -59,7 +57,13 @@ const Analyze = () => {
         type: res.data.result.type,
       });
       let updatedReviewList = JSON.stringify(reviewObjectList);
-      localStorage.setItem("review", updatedReviewList);
+      sessionStorage.setItem("review", updatedReviewList);
+
+      // Setting new review in state
+      setSessionStorageReviews((state) => [
+        ...state,
+        { sentence: sentence, type: res.data.result.type },
+      ]);
 
       setIsApiCalling(false);
     } catch {
@@ -90,37 +94,36 @@ const Analyze = () => {
         >
           Analyze
         </button>
-        {reviewStatus && (
+        {sessionStorageReviews.length !== 0 && (
           <div className="mt-3 p-2">
             <p className="text-2xl font-semibold">
               <u>Review Analysis</u>
             </p>
-            {localStorageReviews &&
-              localStorageReviews.map((item, index) => (
-                <div
-                  key={`local-storage-review-index:${index}`}
-                  className="flex items-center w-full p-3 mt-2 rounded-md bg-slate-100 hover:bg-slate-200"
-                >
-                  <p>{item.sentence}</p>
-                  <p className="ml-2 text-white">
-                    {item.type === "Positive" && (
-                      <span className="p-2 rounded-md bg-green-500">
-                        {item.type}
-                      </span>
-                    )}
-                    {item.type === "Negative" && (
-                      <span className="p-2 rounded-md bg-red-500">
-                        {item.type}
-                      </span>
-                    )}
-                    {item.type === "Neutral" && (
-                      <span className="p-2 rounded-md bg-blue-500">
-                        {item.type}
-                      </span>
-                    )}
-                  </p>
-                </div>
-              ))}
+            {sessionStorageReviews.map((item, index) => (
+              <div
+                key={`local-storage-review-index:${index}`}
+                className="flex justify-between items-center w-full p-3 mt-2 rounded-md bg-slate-100 hover:bg-slate-200"
+              >
+                <p>{item.sentence}</p>
+                <p className="ml-2 text-white">
+                  {item.type === "Positive" && (
+                    <span className="p-2 rounded-md bg-green-500">
+                      {item.type}
+                    </span>
+                  )}
+                  {item.type === "Negative" && (
+                    <span className="p-2 rounded-md bg-red-500">
+                      {item.type}
+                    </span>
+                  )}
+                  {item.type === "Neutral" && (
+                    <span className="p-2 rounded-md bg-blue-500">
+                      {item.type}
+                    </span>
+                  )}
+                </p>
+              </div>
+            ))}
           </div>
         )}
       </div>
