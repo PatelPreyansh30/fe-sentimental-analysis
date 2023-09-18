@@ -1,6 +1,7 @@
 "use client";
 
 import Loader from "@/components/Loader";
+import Gauge from "@/components/Gauge/Gauge";
 import { ApiConstant } from "@/constant/applicationConstant";
 import appClient from "@/network/appClient";
 import { joiUtils } from "@/utils/joiValidation";
@@ -13,6 +14,7 @@ const Analyze = () => {
   const [reviewStatus, setReviewStatus] = useState<string | undefined>();
   const [isApiCalling, setIsApiCalling] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [percentage, setPercentage] = useState(0)
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsButtonClicked(false);
@@ -32,6 +34,16 @@ const Analyze = () => {
     }
   };
 
+  const handelPercentage = (probability: number, type: string) => {
+
+    if(type == 'Positive'){
+      return 200 + probability
+    }
+    else if(type == 'Neutral'){
+      return 100 + probability
+    }
+    return probability
+  }
   const getReviewAnalysis = async () => {
     setIsApiCalling(true);
     try {
@@ -39,6 +51,9 @@ const Analyze = () => {
         sentence: sentence,
       });
       setReviewStatus(res.data.result.type);
+      console.log(res);
+      const probPercentage = handelPercentage(res.data.result.scaled_probability, res.data.result.type)
+      setPercentage(probPercentage)
       setIsApiCalling(false);
     } catch {
       setIsApiCalling(false);
@@ -46,6 +61,7 @@ const Analyze = () => {
     }
   };
 
+  const textColor = '#AAA';
   return (
     <>
       {isApiCalling && <Loader />}
@@ -61,9 +77,8 @@ const Analyze = () => {
         />
         <button
           onClick={handleOnClick}
-          className={`mt-3 px-6 py-2 rounded-full text-white bg-blue-400 ${
-            isButtonClicked ? "cursor-not-allowed" : "hover:bg-blue-500"
-          } border`}
+          className={`mt-3 px-6 py-2 rounded-full text-white bg-blue-400 ${isButtonClicked ? "cursor-not-allowed" : "hover:bg-blue-500"
+            } border`}
           disabled={isButtonClicked}
         >
           Analyze
@@ -95,6 +110,7 @@ const Analyze = () => {
             </div>
           </div>
         )}
+        <Gauge percentage={percentage}/>
       </div>
     </>
   );
