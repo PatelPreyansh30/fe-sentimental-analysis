@@ -1,9 +1,15 @@
-import Analyze from "@/module/Analyze/Analyze";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { ApplicationConstant } from "@/constant/applicationConstant";
 
 export default function Home() {
-  return (
-    <div>
-      <Analyze />
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace(ApplicationConstant.HOME_PATH);
+  }, [router]);
+
+  return <></>;
 }

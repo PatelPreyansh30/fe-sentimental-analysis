@@ -75,7 +75,7 @@ const Analyze = () => {
   return (
     <>
       {isApiCalling && <Loader />}
-      <div className="p-3">
+      <div>
         <TextField
           value={sentence}
           onChange={handleOnChange}
