@@ -6,7 +6,7 @@ import { ToastErrorMessage, ToastWarningMessage } from "@/utils/toastifyAlerts";
 
 const appClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
-  timeout: 5000,
+  // timeout: 15000,
 });
 
 appClient.interceptors.request.use(

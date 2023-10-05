@@ -7,19 +7,28 @@ import appClient from "@/network/appClient";
 import { joiUtils } from "@/utils/joiValidation";
 import { ToastErrorMessage } from "@/utils/toastifyAlerts";
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Analyze = () => {
+  const [sessionStorageReviews, setSessionStorageReviews] = useState<
+    { sentence: string; type: string }[]
+  >([]);
   const [sentence, setSentence] = useState<string>("");
-  const [reviewStatus, setReviewStatus] = useState<string | undefined>();
   const [isApiCalling, setIsApiCalling] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [percentage, setPercentage] = useState(0)
 
+  useEffect(() => {
+    let reviews = sessionStorage.getItem("review");
+    let reviewsList: { sentence: string; type: string }[] = reviews
+      ? JSON.parse(reviews)
+      : [];
+    setSessionStorageReviews(reviewsList);
+  }, []);
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsButtonClicked(false);
     setIsApiCalling(false);
-    setReviewStatus(undefined);
     const { value } = e.currentTarget;
     setSentence(value);
   };
@@ -50,10 +59,24 @@ const Analyze = () => {
       const res = await appClient.post(ApiConstant.GET_REVIEW_RESULT, {
         sentence: sentence,
       });
-      setReviewStatus(res.data.result.type);
-      console.log(res);
-      const probPercentage = handelPercentage(res.data.result.scaled_probability, res.data.result.type)
-      setPercentage(probPercentage)
+
+      // Setting new review in session storage
+      let existingReview = sessionStorage.getItem("review");
+      let reviewObjectList: { sentence: string; type: string }[] =
+        existingReview ? JSON.parse(existingReview) : [];
+      reviewObjectList.push({
+        sentence: sentence,
+        type: res.data.result.type,
+      });
+      let updatedReviewList = JSON.stringify(reviewObjectList);
+      sessionStorage.setItem("review", updatedReviewList);
+
+      // Setting new review in state
+      setSessionStorageReviews((state) => [
+        ...state,
+        { sentence: sentence, type: res.data.result.type },
+      ]);
+
       setIsApiCalling(false);
     } catch {
       setIsApiCalling(false);
@@ -65,7 +88,7 @@ const Analyze = () => {
   return (
     <>
       {isApiCalling && <Loader />}
-      <div className="p-3">
+      <div>
         <TextField
           value={sentence}
           onChange={handleOnChange}
@@ -77,37 +100,43 @@ const Analyze = () => {
         />
         <button
           onClick={handleOnClick}
-          className={`mt-3 px-6 py-2 rounded-full text-white bg-blue-400 ${isButtonClicked ? "cursor-not-allowed" : "hover:bg-blue-500"
-            } border`}
+          className={`mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
+            isButtonClicked ? "cursor-not-allowed" : "hover:bg-green-600"
+          }`}
           disabled={isButtonClicked}
         >
           Analyze
         </button>
-        {reviewStatus && (
+        {sessionStorageReviews.length !== 0 && (
           <div className="mt-3 p-2">
             <p className="text-2xl font-semibold">
               <u>Review Analysis</u>
             </p>
-            <div className="flex items-center w-max p-3 mt-2 rounded-md bg-slate-100 hover:bg-slate-200">
-              <p>{sentence}</p>
-              <p className="ml-2 text-white">
-                {reviewStatus === "Positive" && (
-                  <span className="p-2 rounded-md bg-green-500">
-                    {reviewStatus}
-                  </span>
-                )}
-                {reviewStatus === "Negative" && (
-                  <span className="p-2 rounded-md bg-red-500">
-                    {reviewStatus}
-                  </span>
-                )}
-                {reviewStatus === "Neutral" && (
-                  <span className="p-2 rounded-md bg-blue-500">
-                    {reviewStatus}
-                  </span>
-                )}
-              </p>
-            </div>
+            {sessionStorageReviews.map((item, index) => (
+              <div
+                key={`local-storage-review-index:${index}`}
+                className="flex justify-between items-center w-full p-3 mt-2 rounded-md bg-slate-100 hover:bg-slate-200"
+              >
+                <p>{item.sentence}</p>
+                <p className="ml-2 text-white">
+                  {item.type === "Positive" && (
+                    <span className="p-2 rounded-md bg-green-500">
+                      {item.type}
+                    </span>
+                  )}
+                  {item.type === "Negative" && (
+                    <span className="p-2 rounded-md bg-red-500">
+                      {item.type}
+                    </span>
+                  )}
+                  {item.type === "Neutral" && (
+                    <span className="p-2 rounded-md bg-blue-500">
+                      {item.type}
+                    </span>
+                  )}
+                </p>
+              </div>
+            ))}
           </div>
         )}
         <Gauge percentage={percentage}/>
