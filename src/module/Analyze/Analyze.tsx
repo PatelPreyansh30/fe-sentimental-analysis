@@ -99,10 +99,10 @@ const Analyze = () => {
             <p className="text-2xl font-semibold">
               <u>Review Analysis</u>
             </p>
-            {sessionStorageReviews.map((item, index) => (
+            {sessionStorageReviews.reverse().map((item, index) => (
               <div
                 key={`local-storage-review-index:${index}`}
-                className="flex justify-between items-center w-full p-3 mt-2 rounded-md bg-slate-100 hover:bg-slate-200"
+                className="flex justify-between items-center w-full p-3 mt-2 cursor-pointer rounded-md border bg-gray-200/70"
               >
                 <p>{item.sentence}</p>
                 <p className="ml-2 text-white">
