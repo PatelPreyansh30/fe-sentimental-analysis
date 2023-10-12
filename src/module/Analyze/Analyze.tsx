@@ -17,6 +17,7 @@ const Analyze = () => {
   const [isApiCalling, setIsApiCalling] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [percentage, setPercentage] = useState(0)
+  const [sentimentType, setSentimentType] = useState('Postive')
 
   useEffect(() => {
     let reviews = sessionStorage.getItem("review");
@@ -42,24 +43,15 @@ const Analyze = () => {
       ToastErrorMessage(result.message);
     }
   };
-
-  const handelPercentage = (probability: number, type: string) => {
-
-    if(type == 'Positive'){
-      return 200 + probability
-    }
-    else if(type == 'Neutral'){
-      return 100 + probability
-    }
-    return probability
-  }
   const getReviewAnalysis = async () => {
     setIsApiCalling(true);
     try {
       const res = await appClient.post(ApiConstant.GET_REVIEW_RESULT, {
         sentence: sentence,
       });
-
+      const scaledProbabilitRounded = res.data.result.scaled_probability
+      setPercentage(Math.round(scaledProbabilitRounded))
+      setSentimentType(res.data.result.type)
       // Setting new review in session storage
       let existingReview = sessionStorage.getItem("review");
       let reviewObjectList: { sentence: string; type: string }[] =
@@ -100,13 +92,13 @@ const Analyze = () => {
         />
         <button
           onClick={handleOnClick}
-          className={`mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
-            isButtonClicked ? "cursor-not-allowed" : "hover:bg-green-600"
-          }`}
+          className={`mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${isButtonClicked ? "cursor-not-allowed" : "hover:bg-green-600"
+            }`}
           disabled={isButtonClicked}
         >
           Analyze
         </button>
+        <Gauge value={percentage} sentimentType={sentimentType} />
         {sessionStorageReviews.length !== 0 && (
           <div className="mt-3 p-2">
             <p className="text-2xl font-semibold">
@@ -139,7 +131,6 @@ const Analyze = () => {
             ))}
           </div>
         )}
-        <Gauge percentage={percentage}/>
       </div>
     </>
   );
