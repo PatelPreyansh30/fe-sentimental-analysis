@@ -14,7 +14,7 @@ const Analyze = () => {
   const [sentence, setSentence] = useState<string>("");
   const [isApiCalling, setIsApiCalling] = useState(false);
   const [percentage, setPercentage] = useState(0);
-  const [sentimentType, setSentimentType] = useState("Postive");
+  const [sentimentType, setSentimentType] = useState("");
 
   useEffect(() => {
     let reviews = sessionStorage.getItem("review");

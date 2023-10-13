@@ -13,7 +13,7 @@ const Navbar = (props: { showHideSidebar: any }) => {
       </Tooltip>
       <p className="font-sans text-4xl font-bold text-green-500">
         {"Review Analysis "}
-        <span className="px-2 font-mono bg-green-500 text-white">AI</span>
+        <span className="px-2 font-mono bg-orange-500 text-white">AI</span>
       </p>
     </div>
   );

@@ -69,6 +69,9 @@ const AnalyzeInput = (props: {
 
   return (
     <div className="p-3 border rounded-md shadow-md bg-white">
+      <p className="mb-2 font-mono text-2xl text-center text-orange-500 font-semibold">
+        REVIEW INPUT
+      </p>
       <TextField
         value={props.sentence}
         onChange={handleOnChange}

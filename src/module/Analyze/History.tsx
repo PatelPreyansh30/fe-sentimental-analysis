@@ -6,8 +6,8 @@ const History = (props: { sessionStorageReviews: SessionReviewType[] }) => {
     <div className="p-3 border rounded-md shadow-md bg-white">
       {props.sessionStorageReviews.length !== 0 ? (
         <>
-          <p className="mb-2 text-2xl text-center font-semibold">
-            Session History
+          <p className="mb-2 font-mono text-2xl text-center text-orange-500 font-semibold">
+            REVIEW HISTORY
           </p>
           <div className="h-[200px] overflow-y-auto whitespace-nowrap">
             {props.sessionStorageReviews.map((item, index) => (
@@ -39,7 +39,7 @@ const History = (props: { sessionStorageReviews: SessionReviewType[] }) => {
         </>
       ) : (
         <p className="text-red-600 font-medium">
-          History details not available
+          Review history details not available
         </p>
       )}
     </div>
