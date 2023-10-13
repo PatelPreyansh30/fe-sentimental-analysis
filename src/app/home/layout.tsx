@@ -12,7 +12,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
       <Navbar showHideSidebar={() => setToggleSidebar(!toggleSidebar)} />
       <div className={`mt-[75px] ${toggleSidebar ? "ml-[250px]" : "ml-[0px]"}`}>
         {toggleSidebar && <Sidebar />}
-        <div className="w-full p-4">{children}</div>
+        <div className="w-full p-6">{children}</div>
       </div>
     </div>
   );

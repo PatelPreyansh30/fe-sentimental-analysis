@@ -68,7 +68,7 @@ const AnalyzeInput = (props: {
   };
 
   return (
-    <div>
+    <div className="p-3 border rounded-md shadow-md bg-white">
       <TextField
         value={props.sentence}
         onChange={handleOnChange}
@@ -76,11 +76,12 @@ const AnalyzeInput = (props: {
         id="outlined-textarea"
         label="Enter your review"
         multiline
+        rows={5}
         fullWidth
       />
       <button
         onClick={handleOnClick}
-        className={`mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
+        className={`mt-3 py-2 w-full rounded-full text-white font-semibold bg-green-500 ${
           isButtonClicked ? "cursor-not-allowed" : "hover:bg-green-600"
         }`}
         disabled={isButtonClicked}

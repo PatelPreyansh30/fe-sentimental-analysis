@@ -25,15 +25,17 @@ const Analyze = () => {
     <>
       {isApiCalling && <Loader />}
       <div>
-        <AnalyzeInput
-          sentence={sentence}
-          setSentence={setSentence}
-          setIsApiCalling={setIsApiCalling}
-          setPercentage={setPercentage}
-          setSentimentType={setSentimentType}
-          setSessionStorageReviews={setSessionStorageReviews}
-        />
-        <Gauge value={percentage} sentimentType={sentimentType} />
+        <div className="grid grid-cols-2 gap-4">
+          <AnalyzeInput
+            sentence={sentence}
+            setSentence={setSentence}
+            setIsApiCalling={setIsApiCalling}
+            setPercentage={setPercentage}
+            setSentimentType={setSentimentType}
+            setSessionStorageReviews={setSessionStorageReviews}
+          />
+          <Gauge value={percentage} sentimentType={sentimentType} />
+        </div>
         {sessionStorageReviews.length !== 0 && (
           <div className="mt-3 p-2">
             <p className="text-2xl font-semibold">
