@@ -24,7 +24,7 @@ const Gauge = (props: GaugePropsTypes) => {
     <ReviewsProvider valueStart={0} valueEnd={value}>
       {(value: number) => (
         <div className='flex items-center justify-center w-full'>
-          <div className='w-[200px] h-[200px] m-3'>
+          <div className='w-[250px] h-[250px] m-3 p-3 bg-white'>
             <CircularProgressbar
               value={value}
               text={`${value}% `}

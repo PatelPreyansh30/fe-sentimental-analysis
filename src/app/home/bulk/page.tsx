@@ -1,11 +1,8 @@
 import React from "react";
+import BulkAnalyze from "@/module/Analyze/BulkAnalyze";
 
 const BulkPage = () => {
-  return (
-    <div className="text-xl">
-      Currently this feature is under working, thank you for your patience.
-    </div>
-  );
+  return <BulkAnalyze />
 };
 
 export default BulkPage;
