@@ -6,7 +6,6 @@ import { ToastErrorMessage, ToastWarningMessage } from "@/utils/toastifyAlerts";
 
 const appClient = axios.create({
   baseURL: ApiConstant.BASE_URL,
-  // timeout: 15000,
 });
 
 appClient.interceptors.request.use(
@@ -54,7 +53,7 @@ appClient.interceptors.response.use(
       }
     } else {
       ToastWarningMessage(
-        "Unexcepted error occured, Please try again after some time."
+        "Backend server not responded."
       );
     }
 

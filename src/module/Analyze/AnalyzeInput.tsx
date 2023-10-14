@@ -1,3 +1,4 @@
+import BoxHeading from "@/components/BoxHeading";
 import { ApiConstant } from "@/constant/applicationConstant";
 import appClient from "@/network/appClient";
 import { joiUtils } from "@/utils/joiValidation";
@@ -69,14 +70,11 @@ const AnalyzeInput = (props: {
 
   return (
     <div className="p-3 border rounded-md shadow-md bg-white">
-      <p className="mb-2 font-mono text-2xl text-center text-orange-500 font-semibold">
-        REVIEW INPUT
-      </p>
+      <BoxHeading label="REVIEW INPUT" />
       <TextField
         value={props.sentence}
         onChange={handleOnChange}
         name="sentence"
-        id="outlined-textarea"
         label="Enter your review"
         multiline
         rows={5}

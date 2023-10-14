@@ -3,6 +3,7 @@ import ReviewsProvider from "./ReviewsProvider";
 import { GaugePropsTypes } from "@/utils/types";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import BoxHeading from "../BoxHeading";
 
 const Gauge = (props: GaugePropsTypes) => {
   const calcColor = (sentiment: string) => {
@@ -17,9 +18,7 @@ const Gauge = (props: GaugePropsTypes) => {
 
   return (
     <div className="p-3 border rounded-md shadow-md bg-white">
-      <p className="mb-2 font-mono text-2xl text-center text-orange-500 font-semibold">
-        REVIEW OUTPUT
-      </p>
+      <BoxHeading label="REVIEW OUTPUT" />
       <div className="flex items-center justify-center">
         <div className="relative w-[180px] h-[180px]">
           <ReviewsProvider valueStart={0} valueEnd={props.value}>
