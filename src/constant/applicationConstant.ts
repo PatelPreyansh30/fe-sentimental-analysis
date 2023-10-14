@@ -8,7 +8,7 @@ export const ApiConstant = {
 
   // for single review analysis url
   GET_REVIEW_RESULT: "analyze/",
-  
-  //for bulk review analyis 
+
+  //for bulk review analyis
   GET_BULK_REVIEW_RESULT: "bulk_analyze/",
 };

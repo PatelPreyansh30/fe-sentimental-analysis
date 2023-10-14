@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-slate-50 overflow-hidden ${inter.className}`}>
+      <body className={`bg-slate-50 ${inter.className}`}>
         <ToastifyAlerts />
         {children}
       </body>

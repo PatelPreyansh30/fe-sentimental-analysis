@@ -1,8 +1,7 @@
 import React from "react";
-import BulkAnalyze from "@/module/Analyze/BulkAnalyze";
 
-const BulkPage = () => {
-  return <BulkAnalyze />
+const BulkAnalyzePage = () => {
+  return <div>BulkAnalyzePage</div>;
 };
 
-export default BulkPage;
+export default BulkAnalyzePage;
