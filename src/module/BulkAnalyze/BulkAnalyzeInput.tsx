@@ -7,6 +7,9 @@ import React, { useState } from "react";
 const BulkAnalyzeInput = (props: {
   uploadedFile: File | null;
   setUploadedFile: any;
+  setReviewNumber: any;
+  setReviewPercentage: any;
+  setReviewAverageProbability: any;
   setIsApiCalling: any;
 }) => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -34,6 +37,11 @@ const BulkAnalyzeInput = (props: {
         const res = await appClient.post(
           ApiConstant.GET_BULK_REVIEW_RESULT,
           fileData
+        );
+        props.setReviewNumber(res.data.result.reviewNumber);
+        props.setReviewPercentage(res.data.result.reviewPercentage);
+        props.setReviewAverageProbability(
+          res.data.result.reviewAverageProbability
         );
       }
       props.setIsApiCalling(false);

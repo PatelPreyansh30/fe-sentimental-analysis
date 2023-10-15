@@ -1,4 +1,5 @@
 import BoxHeading from "@/components/BoxHeading";
+import NotAvailable from "@/components/NotAvailable";
 import { SessionReviewType } from "@/utils/types";
 import React from "react";
 
@@ -37,9 +38,7 @@ const History = (props: { sessionStorageReviews: SessionReviewType[] }) => {
           </div>
         </>
       ) : (
-        <p className="text-red-600 font-medium">
-          Review history details not available
-        </p>
+        <NotAvailable label="Review history" />
       )}
     </div>
   );

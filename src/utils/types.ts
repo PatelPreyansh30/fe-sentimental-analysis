@@ -16,3 +16,8 @@ export interface ReviewsProviderProps {
   valueEnd: number;
   children: (value: number) => ReactNode;
 }
+
+export interface BulkReviewOutputType {
+  label: string[];
+  data: number[] | string[];
+}
