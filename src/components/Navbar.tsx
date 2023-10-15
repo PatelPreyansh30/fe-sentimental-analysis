@@ -11,9 +11,11 @@ const Navbar = (props: { showHideSidebar: any }) => {
           onClick={props.showHideSidebar}
         />
       </Tooltip>
-      <p className="font-sans text-4xl font-bold text-green-500">
-        {"Review Analysis "}
-        <span className="px-2 font-mono bg-orange-500 text-white">AI</span>
+      <p className="font-poppins text-3xl font-bold text-indigo-500">
+        {"Review Analyzer "}
+        <span className="px-2 text-2xl font-mono bg-indigo-500 text-white">
+          {"EmoVibe"}
+        </span>
       </p>
     </div>
   );

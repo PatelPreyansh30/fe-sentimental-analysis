@@ -2,6 +2,7 @@ import BoxHeading from "@/components/BoxHeading";
 import { ApiConstant } from "@/constant/applicationConstant";
 import appClient from "@/network/appClient";
 import { ToastErrorMessage } from "@/utils/toastifyAlerts";
+import { Tooltip } from "@mui/material";
 import React, { useState } from "react";
 
 const BulkAnalyzeInput = (props: {
@@ -56,11 +57,16 @@ const BulkAnalyzeInput = (props: {
     <div className="p-3 border rounded-md shadow-md bg-white">
       <div className="grid grid-cols-1 gap-3">
         <BoxHeading label="UPLOAD FILE" />
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="w-full border"
-        />
+        <Tooltip
+          title="Must have CSV with review_text column and JSON with review key"
+          placement="bottom"
+        >
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="w-full border"
+          />
+        </Tooltip>
         <button
           onClick={handleOnClick}
           className={`block mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
