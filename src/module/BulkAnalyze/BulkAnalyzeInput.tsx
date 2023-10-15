@@ -55,7 +55,7 @@ const BulkAnalyzeInput = (props: {
   return (
     <div className="p-3 border rounded-md shadow-md bg-white">
       <div className="grid grid-cols-1 gap-3">
-        <BoxHeading label="Upload CSV, JSON and TXT file" />
+        <BoxHeading label="UPLOAD FILE" />
         <input
           type="file"
           onChange={handleFileChange}

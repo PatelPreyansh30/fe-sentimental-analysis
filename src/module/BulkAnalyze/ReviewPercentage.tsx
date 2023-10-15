@@ -3,6 +3,7 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import NotAvailable from "@/components/NotAvailable";
+import BoxHeading from "@/components/BoxHeading";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -33,7 +34,10 @@ const ReviewPercentage = (props: {
   return (
     <div className="flex items-center justify-center p-3 border rounded-md shadow-md bg-white">
       {props.reviewPercentage ? (
-        <Doughnut data={data} className="w-auto h-[300px]" />
+        <div>
+          <BoxHeading label="REVIEWS PERCENTAGE" />
+          <Doughnut data={data} className="w-auto h-[300px]" />
+        </div>
       ) : (
         <NotAvailable label="Review percentage" />
       )}
