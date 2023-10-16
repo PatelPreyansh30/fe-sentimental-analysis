@@ -1,8 +1,8 @@
 import BoxHeading from "@/components/BoxHeading";
+import Warnings from "@/components/Warnings";
 import { ApiConstant } from "@/constant/applicationConstant";
 import appClient from "@/network/appClient";
 import { ToastErrorMessage } from "@/utils/toastifyAlerts";
-import { Tooltip } from "@mui/material";
 import React, { useState } from "react";
 
 const BulkAnalyzeInput = (props: {
@@ -57,19 +57,17 @@ const BulkAnalyzeInput = (props: {
     <div className="p-3 border rounded-md shadow-md bg-white">
       <div className="grid grid-cols-1 gap-3">
         <BoxHeading label="UPLOAD FILE" />
-        <Tooltip
-          title="Must have CSV with review_text column and JSON with review key"
-          placement="bottom"
-        >
-          <input
-            type="file"
-            onChange={handleFileChange}
-            className="w-full border"
-          />
-        </Tooltip>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="w-full border"
+        />
+        <Warnings label="&#8226; CSV file must contain a 'review_text' column" />
+        <Warnings label="&#8226; JSON file must contain a 'reviews' key with a list of review texts" />
+        <Warnings label="&#8226; Text file must contains reviews start with new line" />
         <button
           onClick={handleOnClick}
-          className={`block mt-3 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
+          className={`block mt-2 px-6 py-2 rounded-full text-white font-semibold bg-green-500 ${
             isButtonClicked ? "cursor-not-allowed" : "hover:bg-green-600"
           }`}
           disabled={isButtonClicked}

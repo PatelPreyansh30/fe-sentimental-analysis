@@ -20,7 +20,7 @@ const BulkAnalyze = () => {
   return (
     <>
       {isApiCalling && <Loader />}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         <BulkAnalyzeInput
           uploadedFile={uploadedFile}
           setUploadedFile={setUploadedFile}
@@ -29,11 +29,13 @@ const BulkAnalyze = () => {
           setReviewAverageProbability={setReviewAverageProbability}
           setIsApiCalling={setIsApiCalling}
         />
-        <ReviewNumber reviewNumber={reviewNumber} />
-        <ReviewPercentage reviewPercentage={reviewPercentage} />
-        <ReviewAverageProbability
-          reviewAverageProbability={reviewAverageProbability}
-        />
+        <div className="grid grid-cols-3 gap-4">
+          <ReviewNumber reviewNumber={reviewNumber} />
+          <ReviewAverageProbability
+            reviewAverageProbability={reviewAverageProbability}
+          />
+          <ReviewPercentage reviewPercentage={reviewPercentage} />
+        </div>
       </div>
     </>
   );
