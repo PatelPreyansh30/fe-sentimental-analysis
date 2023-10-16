@@ -1,11 +1,11 @@
 import { BulkReviewOutputType } from "@/utils/types";
 import React from "react";
-import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement, Legend, Tooltip } from "chart.js";
+import { Pie } from "react-chartjs-2";
 import NotAvailable from "@/components/NotAvailable";
 import BoxHeading from "@/components/BoxHeading";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+Chart.register(ArcElement, Tooltip, Legend);
 
 const ReviewAverageProbability = (props: {
   reviewAverageProbability: BulkReviewOutputType | undefined;
@@ -36,10 +36,11 @@ const ReviewAverageProbability = (props: {
       {props.reviewAverageProbability ? (
         <div>
           <BoxHeading label="REVIEWS AVERAGE PROBABILITY" />
-        <Doughnut data={data} className="w-auto h-[300px]" />
+          {/* <Doughnut data={data} className="w-[300px] h-auto" /> */}
+          <Pie data={data} className="w-[300px] h-auto" />
         </div>
       ) : (
-        <NotAvailable label="Review average probability" />
+        <NotAvailable label="Reviews average probability" />
       )}
     </div>
   );

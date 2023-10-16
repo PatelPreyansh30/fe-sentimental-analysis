@@ -1,11 +1,17 @@
 import React from "react";
-import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import {
+  Chart,
+  ArcElement,
+  Legend,
+  Tooltip,
+  RadialLinearScale,
+} from "chart.js";
+import { PolarArea } from "react-chartjs-2";
 import { BulkReviewOutputType } from "@/utils/types";
 import NotAvailable from "@/components/NotAvailable";
 import BoxHeading from "@/components/BoxHeading";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+Chart.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
 const ReviewNumber = (props: {
   reviewNumber: BulkReviewOutputType | undefined;
@@ -36,10 +42,10 @@ const ReviewNumber = (props: {
       {props.reviewNumber ? (
         <div>
           <BoxHeading label="REVIEWS NUMBER" />
-          <Doughnut data={data} className="w-auto h-[300px]" />
+          <PolarArea data={data} className="w-[300px] h-auto" />
         </div>
       ) : (
-        <NotAvailable label="Review number" />
+        <NotAvailable label="Reviews number" />
       )}
     </div>
   );
