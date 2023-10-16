@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Review Analysis AI",
+  title: "EmoVibe: Review Analyzer",
   description:
     "Boost your business with our cutting-edge review analysis AI web app. Gain valuable customer insights, enhance user experience, and make data-driven decisions. Try it today!",
 };
