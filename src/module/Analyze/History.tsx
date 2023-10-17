@@ -9,7 +9,7 @@ const History = (props: { sessionStorageReviews: SessionReviewType[] }) => {
       {props.sessionStorageReviews.length !== 0 ? (
         <>
           <BoxHeading label="REVIEW HISTORY" />
-          <div className="h-[400px] overflow-y-auto">
+          <div className="h-[450px] overflow-y-auto">
             {props.sessionStorageReviews.map((item, index) => (
               <div
                 key={`local-storage-review-index:${index}`}
