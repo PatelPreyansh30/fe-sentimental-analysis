@@ -60,7 +60,7 @@ const BulkAnalyzeInput = (props: {
         <input
           type="file"
           onChange={handleFileChange}
-          className="w-full border"
+          className="w-full border cursor-pointer"
         />
         <Warnings label="&#8226; CSV file must contain a 'review_text' column" />
         <Warnings label="&#8226; JSON file must contain a 'reviews' key with a list of review texts" />

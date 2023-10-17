@@ -17,14 +17,14 @@ const ReviewAverageProbability = (props: {
         label: "Review average probability",
         data: props.reviewAverageProbability?.data,
         backgroundColor: [
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(255, 99, 132, 0.2)",
+          "rgba(2, 204, 204, 0.4)",
+          "rgba(111, 87, 233, 0.4)",
+          "rgba(236, 91, 134, 0.4)",
         ],
         borderColor: [
-          "rgba(75, 192, 192, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(255, 99, 132, 1)",
+          "rgba(2, 204, 204, 1)",
+          "rgba(111, 87, 233, 1)",
+          "rgba(236, 91, 134, 1)",
         ],
         borderWidth: 1,
       },
@@ -36,7 +36,6 @@ const ReviewAverageProbability = (props: {
       {props.reviewAverageProbability ? (
         <div>
           <BoxHeading label="REVIEWS AVERAGE PROBABILITY" />
-          {/* <Doughnut data={data} className="w-[300px] h-auto" /> */}
           <Pie data={data} className="w-[300px] h-auto" />
         </div>
       ) : (
