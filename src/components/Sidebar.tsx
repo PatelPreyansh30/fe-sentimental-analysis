@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Troubleshoot } from "@mui/icons-material";
+import { Home, Info, Troubleshoot } from "@mui/icons-material";
 import { ApplicationConstant } from "@/constant/applicationConstant";
 import Link from "next/link";
 
@@ -13,6 +13,11 @@ const sidebarRoutes = [
     state: "Bulk Analysis",
     icon: <Troubleshoot />,
     path: ApplicationConstant.BULK_ANALYSIS_PATH,
+  },
+  {
+    state: "About Us",
+    icon: <Info />,
+    path: ApplicationConstant.ABOUT_PATH,
   },
 ];
 
