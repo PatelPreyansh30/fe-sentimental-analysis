@@ -9,14 +9,14 @@ const History = (props: { sessionStorageReviews: SessionReviewType[] }) => {
       {props.sessionStorageReviews.length !== 0 ? (
         <>
           <BoxHeading label="REVIEW HISTORY" />
-          <div className="h-[200px] overflow-y-auto whitespace-nowrap">
+          <div className="h-[400px] overflow-y-auto">
             {props.sessionStorageReviews.map((item, index) => (
               <div
                 key={`local-storage-review-index:${index}`}
                 className="flex justify-between items-center w-full p-3 mb-2 cursor-pointer rounded-md border bg-gray-200/70"
               >
                 <p>{item.sentence}</p>
-                <p className="ml-2 text-white">
+                <p className="ml-4 text-white">
                   {item.type === "Positive" && (
                     <span className="p-2 rounded-md bg-green-500">
                       {item.type}

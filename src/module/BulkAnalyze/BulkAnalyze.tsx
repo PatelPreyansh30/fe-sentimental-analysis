@@ -29,13 +29,15 @@ const BulkAnalyze = () => {
           setReviewAverageProbability={setReviewAverageProbability}
           setIsApiCalling={setIsApiCalling}
         />
-        <div className="grid grid-cols-3 gap-4">
-          <ReviewNumber reviewNumber={reviewNumber} />
-          <ReviewAverageProbability
-            reviewAverageProbability={reviewAverageProbability}
-          />
-          <ReviewPercentage reviewPercentage={reviewPercentage} />
-        </div>
+        {reviewNumber && reviewAverageProbability && reviewPercentage && (
+          <div className="grid grid-cols-3 gap-4">
+            <ReviewNumber reviewNumber={reviewNumber} />
+            <ReviewAverageProbability
+              reviewAverageProbability={reviewAverageProbability}
+            />
+            <ReviewPercentage reviewPercentage={reviewPercentage} />
+          </div>
+        )}
       </div>
     </>
   );
